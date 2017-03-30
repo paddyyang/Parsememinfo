@@ -1,7 +1,7 @@
 import os
 import parse
 
-example = [[0 for i in range(2)] for i in range(10)]
+example = [[0 for i in range(2)] for j in range(10)]
 
 def get_training_data(pid_name):
 
@@ -19,11 +19,12 @@ def get_training_data(pid_name):
 
                         objects_value = sum(objects)
                         heap_value = heaps0[3] + heaps1[3]
+                        #print 'hello ' + str(heaps0[3]) + ' ' + str(heaps1[3])
                         exa_index = exa_index + 1
                         example[exa_index][0] = heap_value
                         example[exa_index][1] = objects_value
 
 
 
-get_training_data('com.anydo')
+get_training_data('com.tencent.mm')
 print example

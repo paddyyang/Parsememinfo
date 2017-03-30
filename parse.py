@@ -46,6 +46,7 @@ def parseLogFile(file_name):
         print 'parseLogFile: ' + file_name
         pid_name = ''
         mem_index = -1
+        mem_info.clear()
         f = open(file_name,"r")
         while True:
             line = f.readline()
