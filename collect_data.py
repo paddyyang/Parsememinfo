@@ -1,10 +1,10 @@
 import os
 import parse
 
-example = [[0 for i in range(2)] for j in range(10)]
 
-def get_training_data(pid_name):
+def get_training_data(pid_name, data_size):
 
+    example = [[0 for i in range(2)] for j in range(data_size)]
     exa_index = -1
     files = os.listdir('./')
     print files
@@ -24,7 +24,9 @@ def get_training_data(pid_name):
                         example[exa_index][0] = heap_value
                         example[exa_index][1] = objects_value
 
+    return example
 
 
-get_training_data('com.tencent.mm')
-print example
+
+#get_training_data('com.pyzed.androidmemoryleaktest')
+#print example
