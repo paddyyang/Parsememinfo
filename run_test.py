@@ -19,7 +19,7 @@ def run_monkey_test():
 
 def generate_logs():
     output_name = time.strftime('%Y-%m-%d-%H-%M-%S.meminfo',time.localtime(time.time()))
-    dump_cmd = "adb shell dumpsys meminfo -a | tee " + output_name
+    dump_cmd = "adb shell dumpsys meminfo -a | tee ./data/" + output_name
     #subprocess.call(dump_cmd, stdout=subprocess.PIPE, shell=True)
     os.system(dump_cmd)
     print 'collect_memoinfo over!'
@@ -33,8 +33,8 @@ if(len(sys.argv) == 3):
             generate_logs()
             time.sleep(interval)
 
-        ex1 = codata.get_training_data('com.pyzed.androidmemoryleaktest', times)
-        print ex1
+        #ex1 = codata.get_training_data('com.pyzed.androidmemoryleaktest', times)
+        #print ex1
 else:
     print "Usage: \n" + sys.argv[0] + "   <number of times>  <number of interval>" 
 

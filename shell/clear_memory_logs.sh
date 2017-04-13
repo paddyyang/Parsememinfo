@@ -1,2 +1,3 @@
 #! /bin/sh
-rm ./*.meminfo
+rm ./data/*.meminfo
+rm ./*.pyc
