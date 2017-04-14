@@ -8,6 +8,10 @@ import collect_data as codata
 import draw_node as drawn
 
 ex1 = codata.get_training_data('com.pyzed.androidmemoryleaktest', 11)
+
+if(len(sys.argv) == 2):
+    ex1 = codata.get_training_data(sys.argv[1], 11)
+
 print 'ex1 = ' 
 print ex1
 
