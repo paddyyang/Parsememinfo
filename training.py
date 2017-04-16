@@ -7,6 +7,8 @@ import math
 import collect_data as codata
 import draw_node as drawn
 
+#sys.setrecursionlimit(100000)
+
 ex1 = codata.get_training_data('com.pyzed.androidmemoryleaktest', 11)
 
 if(len(sys.argv) == 2):
