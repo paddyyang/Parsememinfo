@@ -9,6 +9,7 @@ import math
 
 #### self-defined function ###
 import collect_data as codata
+import parseConfig as pc
 
 def run_monkey_test():
     monkey_cmd = 'adb shell monkey --ignore-crashes --ignore-timeouts --kill-process-after-error  --ignore-security-exceptions --throttle 1000 -v -v -v -s 5 1000 1'
@@ -25,18 +26,17 @@ def generate_logs():
     print 'collect_memoinfo over!'
     return
 
+print "Usage: \n" + sys.argv[0] + "   <number of times>  <number of interval> or with default config file" 
 if(len(sys.argv) == 3):
         interval = int(sys.argv[2])
         times = int(sys.argv[1])
-
-        for i in range(0, times):
-            generate_logs()
-            time.sleep(interval)
-
         #ex1 = codata.get_training_data('com.pyzed.androidmemoryleaktest', times)
         #print ex1
 else:
-    print "Usage: \n" + sys.argv[0] + "   <number of times>  <number of interval>" 
+        times, interval, package = pc.get_config()
 
+for i in range(0, times):
+    generate_logs()
+    time.sleep(interval)
 
 
