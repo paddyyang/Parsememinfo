@@ -1,4 +1,6 @@
 import os
+import parseConfig as pc
+
 #
 #  use 'adb shell dumpsys activity top' command
 #  will give us the current activity name
@@ -21,3 +23,7 @@ def totalMem():
     text = execCmd('adb shell cat /proc/meminfo')
     component = getComponent(text[0])
     return component
+
+def totalMem1():
+    size, interval, package, memory_kb = pc.get_config()
+    return memory_kb

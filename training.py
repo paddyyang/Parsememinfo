@@ -44,7 +44,7 @@ def train_sample(package, size):
         delta_mean = delta_mean_matrix[0]
         print 'delta_mean = ', delta_mean
 
-        total_memory = umem.totalMem()
+        total_memory = umem.totalMem1()
         print 'total memory = ' , total_memory
 
         delta_mean_ratio = delta_mean/int(total_memory)
