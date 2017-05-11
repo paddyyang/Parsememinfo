@@ -52,10 +52,14 @@ def train_sample(package, size):
 
         delta_heaps = [item[0] for item in delta]
         delta_objects = [item[1] for item in delta]
-        delta_corr_matrix = np.corrcoef(delta_heaps, delta_objects)
-        delta_corr = delta_corr_matrix[0][1]
-
-        print 'delta_corr = ', delta_corr
+        #delta_corr_matrix = np.corrcoef(delta_heaps, delta_objects)
+        #delta_corr = delta_corr_matrix[0][1]
+        #print 'delta_corr = ', delta_corr
+        a_heaps = [item[0] for item in ex1]
+        a_objects = [item[1] for item in ex1]
+        a_corr_matrix = np.corrcoef(a_heaps, a_objects)
+        a_corr = a_corr_matrix[0][1]
+        print 'a_corr = ', a_corr
 
         delta_times_ratio = sum([int(item > 0) for item in delta_heaps])/(1.0000 * len(delta_heaps))
 
@@ -69,7 +73,11 @@ def train_sample(package, size):
        # Y = [3, 4, 4, 3]
        # Z = [1, 2, 1, 1]
        # ax.scatter(X, Y, Z)
-        ax.scatter(delta_mean_ratio, delta_corr, delta_times_ratio)
+       #ax.scatter(delta_mean_ratio, delta_corr, delta_times_ratio)
+        ax.scatter(delta_mean_ratio, a_corr, delta_times_ratio)
+        ax.set_xlabel('delta_mean_ratio')
+        ax.set_ylabel('a_corr')
+        ax.set_zlabel('delta_times_ratio')
         plt.show()
 
         drawn.draw_node(delta)

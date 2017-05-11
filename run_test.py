@@ -33,7 +33,7 @@ if(len(sys.argv) == 3):
         #ex1 = codata.get_training_data('com.pyzed.androidmemoryleaktest', times)
         #print ex1
 else:
-        times, interval, package = pc.get_config()
+        times, interval, package, memory_kb = pc.get_config()
 
 for i in range(0, times):
     generate_logs()
