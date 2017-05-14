@@ -14,16 +14,26 @@ def get_training_data(pid_name, data_size):
                     meminfo = parse.parseLogFile('./data/' + file_name)
                     if(meminfo.has_key(pid_name)):
                         values0 = meminfo.get(pid_name)
-                        objects = values0.get('Objects')
-                        heaps0 = values0.get('Dalvik Heap ')
-                        heaps1 = values0.get('Native Heap ')
+                        if (values0):
+                                objects = values0.get('Objects')
+                                heaps0 = values0.get('Dalvik Heap ')
+                                heaps1 = values0.get('Native Heap ')
 
-                        objects_value = sum(objects)
-                        heap_value = heaps0[3] + heaps1[3]
-                        #print 'hello ' + str(heaps0[3]) + ' ' + str(heaps1[3])
+                                objects_value = sum(objects)
+                                heap_value = heaps0[3] + heaps1[3]
+                                #print 'hello ' + str(heaps0[3]) + ' ' + str(heaps1[3])
+                                exa_index = exa_index + 1
+                                example[exa_index][0] = heap_value
+                                example[exa_index][1] = objects_value
+                        else:
+                                exa_index = exa_index + 1
+                                example[exa_index][0] = 0
+                                example[exa_index][1] = 0
+                    else:
+                        print 'no key ......!'
                         exa_index = exa_index + 1
-                        example[exa_index][0] = heap_value
-                        example[exa_index][1] = objects_value
+                        example[exa_index][0] = 0
+                        example[exa_index][1] = 0
 
     return example
 
