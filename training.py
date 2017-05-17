@@ -13,7 +13,8 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 #sys.setrecursionlimit(100000)
-def train_sample(package, size):
+#def train_sample(package, size):
+def train_sample():
         #get all the sub-directory in data directory
         sub_dirs = os.listdir('./data')
         #sub_dirs = [x for x in files if os.path.isdir(x)]
@@ -31,6 +32,12 @@ def train_sample(package, size):
                     leak_memory = -1
                 elif dir_name.find('leak') > -1:
                     leak_memory = 1
+
+
+                tmp_index = dir_name.rfind('_')
+                package = dir_name[tmp_index+1:]
+                print 'package == ', package
+
 
                 ex1 = codata.get_training_data(package, './data/' + dir_name )
 
@@ -100,14 +107,20 @@ def train_sample(package, size):
         df['delta_times_ratio'] = delta_times_ratio
         df['a_leak_memory'] = a_leak_memory
         df['a_dir_name'] = a_dir_name
-        df.to_csv(package + '.csv', index=False)
+        df.to_csv('out.csv', index=False)
 
-        fig = plt.figure()
-        ax = fig.add_subplot(111, projection='3d')
-        ax.scatter(delta_mean_ratio, a_corr, delta_times_ratio)
-        ax.set_xlabel('delta_mean_ratio')
-        ax.set_ylabel('a_corr')
-        ax.set_zlabel('delta_times_ratio')
-        plt.show()
+#        fig = plt.figure()
+#        ax = fig.add_subplot(111, projection='3d')
+#        for i in range(0, len(a_leak_memory)):
+#            if a_leak_memory[i] == 1:
+#                ax.scatter(delta_mean_ratio[i], a_corr[i], delta_times_ratio[i], marker = 'o')
+#            elif a_leak_memory[i] == -1:
+#                ax.scatter(delta_mean_ratio[i], a_corr[i], delta_times_ratio[i], marker = 'x')
+#            else:
+#                ax.scatter(delta_mean_ratio[i], a_corr[i], delta_times_ratio[i], marker = '?')
+#        ax.set_xlabel('delta_mean_ratio')
+#        ax.set_ylabel('a_corr')
+#        ax.set_zlabel('delta_times_ratio')
+#        plt.show()
 
         #drawn.draw_node(delta)

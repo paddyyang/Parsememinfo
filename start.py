@@ -9,5 +9,6 @@ import draw_node as drawn
 import training
 import parseConfig as pc
 
-size, interval, package, memory_kb = pc.get_config()
-training.train_sample(package, int(size))
+#size, interval, package, memory_kb = pc.get_config()
+#training.train_sample(package, int(size))
+training.train_sample()
