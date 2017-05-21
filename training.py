@@ -43,40 +43,38 @@ def train_sample():
 
                 print 'ex1 = ', ex1
 
+                #now we compute memory area for increase or decrease
+                #the initial memory size when start to test
+                memory_origin = ex1[0][0]
+                inc_area = 0.0
+                total_area = 0.0
+                for i in range(1, len(ex1)):
+                    # up bottom
+                    a = ex1[i-1][0] - memory_origin
+                    # down bottom
+                    b = ex1[i][0] - memory_origin
+                    #area
+                    inc_area = inc_area + (a + b) * 0.5
+                    total_area = total_area + (abs(a) + abs(b)) * 0.5
+
+                inc_memory_ratio = inc_area / total_area
+                print 'inc_memory_ratio = ', inc_memory_ratio
+
                 # compute delta
                 delta = [[0 for i in range(len(ex1[0]))] for j in range(len(ex1)-1)]
-                #vector = [0 for i in range(len(ex1)-1)]
 
                 for i in range(0, len(delta)):
-
                     # heap memory increase
                     delta[i][0] = (ex1[i+1][0] - ex1[i][0])
                     # objects number increase
                     delta[i][1] = (ex1[i+1][1] - ex1[i][1])
 
-               # for i in range(0, len(vector)):
-               #     if delta[i][1] == 0:
-               #         vector[i] = float("inf")
-               #     else:
-               #         vector[i] = delta[i][0] / delta[i][1]
 
                 print 'delta = ', delta
 
-                delta_mean_matrix = np.mean(delta, axis=0)
-                delta_mean = delta_mean_matrix[0]
-                print 'delta_mean = ', delta_mean
-
-                total_memory = umem.totalMem1()
-                print 'total memory = ' , total_memory
-
-                delta_mean_ratio = 1000 * delta_mean/int(total_memory)
-                print 'delta_mean_ratio = ', delta_mean_ratio
 
                 delta_heaps = [item[0] for item in delta]
                 delta_objects = [item[1] for item in delta]
-                #delta_corr_matrix = np.corrcoef(delta_heaps, delta_objects)
-                #delta_corr = delta_corr_matrix[0][1]
-                #print 'delta_corr = ', delta_corr
                 a_heaps = [item[0] for item in ex1]
                 a_objects = [item[1] for item in ex1]
                 a_corr_matrix = np.corrcoef(a_heaps, a_objects)
@@ -89,7 +87,7 @@ def train_sample():
 
                 data_index = data_index + 1
                 #format: delta mean ratio, corr, delta times ratio, lean or not, sample label
-                data_mat[data_index] = [delta_mean_ratio, a_corr, delta_times_ratio, leak_memory, dir_name]
+                data_mat[data_index] = [inc_memory_ratio, a_corr, delta_times_ratio, leak_memory, dir_name]
 
 
         print 'data_matrix = ', data_mat
@@ -102,7 +100,7 @@ def train_sample():
         a_dir_name = [x[4] for x in data_mat]
 
         df = pd.DataFrame()
-        df['delta_mean_ratio'] = delta_mean_ratio
+        df['inc_memory_ratio'] = delta_mean_ratio
         df['a_corr'] = a_corr
         df['delta_times_ratio'] = delta_times_ratio
         df['a_leak_memory'] = a_leak_memory

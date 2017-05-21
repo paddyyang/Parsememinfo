@@ -14,7 +14,7 @@ from mpl_toolkits.mplot3d import Axes3D
 
 def show_data():
     df = pd.read_csv('out.csv')
-    delta_mean_ratio = df['delta_mean_ratio']
+    delta_mean_ratio = df['inc_memory_ratio']
     a_corr = df['a_corr']
     delta_times_ratio = df['delta_times_ratio']
     a_leak_memory =  df['a_leak_memory']
@@ -31,7 +31,7 @@ def show_data():
         else:
             ax.scatter(delta_mean_ratio[i], a_corr[i], delta_times_ratio[i], marker = '?')
 
-    ax.set_xlabel('delta_mean_ratio')
+    ax.set_xlabel('inc_memory_ratio')
     ax.set_ylabel('a_corr')
     ax.set_zlabel('delta_times_ratio')
     plt.show()
