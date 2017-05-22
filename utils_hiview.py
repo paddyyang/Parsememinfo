@@ -32,7 +32,7 @@ def parseComponent(line_text):
     layout_left = view_attr_layout[:layout0]
     layout_top = view_attr_layout[layout0 + 1: layout1]
     layout_right = view_attr_layout[layout1 + 1: layout2]
-    layout_bottom = view_attr_layout[layout2 + 1]
+    layout_bottom = view_attr_layout[layout2 + 1:]
 
     #print 'layout: ', layout_left, ', ', layout_top,', ', layout_right,',', layout_bottom
     view_object['view_abs_layout_left'] = int(layout_left)
@@ -72,19 +72,27 @@ def getComponent(line_text, view_list, ref_pos):
 def compute_view_layout(index, view_list):
 
     index_temp = index -1
-    if view_list[index]['view_level'] == 0:
-        view_list[index]['view_layout_left'] = view_list[index]['view_abs_layout_left']
-        view_list[index]['view_layout_top'] = view_list[index]['view_abs_layout_top']
-        view_list[index]['view_layout_right'] = view_list[index]['view_abs_layout_right']
-        view_temp[index]['view_layout_bottom'] = view_list[index]['view_abs_layout_bottom']
-    else:
-        while index_temp > 0 and view_list[index]['view_level'] <= view_list[index_temp]['view_level']:
-            index_temp = index -1
 
-        view_list[index]['view_layout_left'] = view_list[index]['view_abs_layout_left'] + compute_view_layout(index_temp,view_list)
-        view_list[index]['view_layout_top'] = view_list[index]['view_abs_layout_top']
-        view_list[index]['view_layout_right'] = view_list[index]['view_abs_layout_right']
-        view_temp[index]['view_layout_bottom'] = view_list[index]['view_abs_layout_bottom']
+    if view_list[index]['view_layout_left']  == -1:
+            if view_list[index]['view_level'] == 0:
+                view_list[index]['view_layout_left'] = view_list[index]['view_abs_layout_left']
+                view_list[index]['view_layout_top'] = view_list[index]['view_abs_layout_top']
+                view_list[index]['view_layout_right'] = view_list[index]['view_abs_layout_right']
+                view_list[index]['view_layout_bottom'] = view_list[index]['view_abs_layout_bottom']
+            else:
+                while index_temp > 0 and view_list[index]['view_level'] <= view_list[index_temp]['view_level']:
+                    index_temp = index_temp -1
+
+                left, top, right, bottom = compute_view_layout(index_temp,view_list)
+                view_list[index]['view_layout_left'] = view_list[index]['view_abs_layout_left'] +  left
+                view_list[index]['view_layout_top'] = view_list[index]['view_abs_layout_top'] + top
+                view_list[index]['view_layout_right'] = view_list[index]['view_abs_layout_right'] + left
+                view_list[index]['view_layout_bottom'] = view_list[index]['view_abs_layout_bottom'] + top
+
+
+
+    #print view_list[index]
+    return view_list[index]['view_layout_left'], view_list[index]['view_layout_top'],view_list[index]['view_layout_right'],view_list[index]['view_layout_bottom'],
 
 
         
@@ -106,15 +114,16 @@ def dumpView():
         else:
             getComponent(aline, view_list, ref_pos)
 
-    for i in range(0, len(view_list)):
-        print 'i = ',i, '-->', view_list[i]
-
 
     #compute real layout
     for i in range(0, len(view_list)):
         compute_view_layout(i, view_list)
+
+
+    for i in range(0, len(view_list)):
+        print 'i = ',i, '-->', view_list[i]
+        print '####################################'
+    #print 'view_list = ', view_list
     
-
-
 
 dumpView()
