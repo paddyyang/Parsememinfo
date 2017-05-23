@@ -5,6 +5,7 @@ import sys
 import math
 
 import utils_top_activity as utop
+import utils_hiview as uhi
 
 def rotate_screen(orien):
     op_cmd = "./shell/adb_rotate.sh " + orien
@@ -37,11 +38,20 @@ def restart():
        startPackage(component) 
        time.sleep(3);
 
-if(len(sys.argv) == 2):
+def tap(view_id):
+   while True:
+           l, t = uhi.dumpViewLayout(view_id) 
+           op_cmd = "adb shell input tap " + str(l) + ' ' + str(t)
+           os.system(op_cmd)
+           time.sleep(3);
+
+if(len(sys.argv) >= 2):
     option = sys.argv[1]
     if (option == 'rotate'):
         rotate()
     elif (option == 'restart'):
         restart()
+    elif (option == 'tap'):
+        tap(sys.argv[2])
 
 

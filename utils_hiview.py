@@ -21,6 +21,7 @@ def parseComponent(line_text):
     #print 'view_type = ', view_type, ', view_attr = ', view_attr
     view_object['view_type'] = view_type
 
+    #print 'line_text = ', line_text
     view_attrs = view_attr.split()
     #print 'view_attrs = ', view_attrs
 
@@ -62,12 +63,14 @@ def getComponent(line_text, view_list, ref_pos):
      if(pos == -1):
         pos = line_text.find('android')
 
-     print 'pos = ', pos
+     #print 'pos = ', pos
 
      if pos > -1:
         temp = parseComponent(line_text)
         temp['view_level'] = pos - ref_pos - 2 
         view_list.append(temp)
+
+     return pos
 
 def compute_view_layout(index, view_list):
 
@@ -97,7 +100,10 @@ def compute_view_layout(index, view_list):
 
         
 
-def dumpView():
+def dumpViewLayout(view_id):
+
+    left = -1
+    top = -1
     ref_pos = -1
     view_list = []
     view_index = 0
@@ -112,18 +118,22 @@ def dumpView():
             if ref_pos > -1:
                 start_tag = 1
         else:
-            getComponent(aline, view_list, ref_pos)
+            if getComponent(aline, view_list, ref_pos) == -1:
+                break
 
 
     #compute real layout
     for i in range(0, len(view_list)):
         compute_view_layout(i, view_list)
 
-
-    for i in range(0, len(view_list)):
-        print 'i = ',i, '-->', view_list[i]
-        print '####################################'
+    #find view_id
+    for item in view_list:
+        if item['view_id'] == view_id:
+            left = item['view_layout_left']
+            top = item['view_layout_top']
+            break
+    #for i in range(0, len(view_list)):
+    #    print 'i = ',i, '-->', view_list[i]
+    #    print '####################################'
     #print 'view_list = ', view_list
-    
-
-dumpView()
+    return left, top
