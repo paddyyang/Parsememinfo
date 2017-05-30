@@ -9,17 +9,23 @@ import draw_node as drawn
 import numpy as np
 import pandas as pd
 import utils_memory as umem
+import utils_area as uarea
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 #sys.setrecursionlimit(100000)
 #def train_sample(package, size):
-def train_sample():
+def train_sample(mydir):
         #get all the sub-directory in data directory
         sub_dirs = os.listdir('./data')
         #sub_dirs = [x for x in files if os.path.isdir(x)]
         sub_dirs.sort()
         sub_size = len(sub_dirs)
+
+        if mydir != '':
+            sub_dirs[:] = []
+            sub_dirs.append(mydir)
+            sub_size = 1
 
         data_mat = [[0 for i in range(4)] for j in range(sub_size)]
         data_index = -1
@@ -43,22 +49,6 @@ def train_sample():
 
                 print 'ex1 = ', ex1
 
-                #now we compute memory area for increase or decrease
-                #the initial memory size when start to test
-                memory_origin = ex1[0][0]
-                inc_area = 0.0
-                total_area = 0.0
-                for i in range(1, len(ex1)):
-                    # up bottom
-                    a = ex1[i-1][0] - memory_origin
-                    # down bottom
-                    b = ex1[i][0] - memory_origin
-                    #area
-                    inc_area = inc_area + (a + b) * 0.5
-                    total_area = total_area + (abs(a) + abs(b)) * 0.5
-
-                inc_memory_ratio = inc_area / total_area
-                print 'inc_memory_ratio = ', inc_memory_ratio
 
                 # compute delta
                 delta = [[0 for i in range(len(ex1[0]))] for j in range(len(ex1)-1)]
@@ -69,12 +59,30 @@ def train_sample():
                     # objects number increase
                     delta[i][1] = (ex1[i+1][1] - ex1[i][1])
 
-
                 print 'delta = ', delta
+                if sub_size == 1:
+                        test_memory_delta = [item[0] for item in delta]
+                        test_memory_times = [i for i in range(len(delta))]
+                        plt.scatter(test_memory_times, test_memory_delta)
+                        plt.show()
 
 
                 delta_heaps = [item[0] for item in delta]
                 delta_objects = [item[1] for item in delta]
+                #now we compute memory area for increase or decrease
+                inc_area = 0.0
+                total_area = 0.0
+                for i in range(0, len(delta)):
+                    if i == 0:
+                        inc_area = inc_area + uarea.compute(0, delta_heaps[i])
+                        total_area = total_area + uarea.compute_all(0, delta_heaps[i])
+                    else:
+                        inc_area = inc_area + uarea.compute(delta_heaps[i-1], delta_heaps[i])
+                        total_area = total_area + uarea.compute_all(delta_heaps[i-1], delta_heaps[i])
+                        
+                inc_memory_ratio = inc_area / total_area
+                print 'inc_memory_ratio = ', inc_memory_ratio
+
                 a_heaps = [item[0] for item in ex1]
                 a_objects = [item[1] for item in ex1]
                 a_corr_matrix = np.corrcoef(a_heaps, a_objects)

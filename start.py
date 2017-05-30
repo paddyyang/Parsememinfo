@@ -11,4 +11,4 @@ import parseConfig as pc
 
 #size, interval, package, memory_kb = pc.get_config()
 #training.train_sample(package, int(size))
-training.train_sample()
+training.train_sample('')
