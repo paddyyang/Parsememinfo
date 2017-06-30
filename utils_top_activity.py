@@ -21,3 +21,7 @@ def topActivity():
     text = execCmd('adb shell dumpsys activity top')
     component = getComponent(text[1])
     return component
+
+
+test_name = topActivity()
+print test_name

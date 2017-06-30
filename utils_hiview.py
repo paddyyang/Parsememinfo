@@ -131,9 +131,13 @@ def dumpViewLayout(view_id):
         if item['view_id'] == view_id:
             left = item['view_layout_left']
             top = item['view_layout_top']
+            print 'we have found this one: ', view_id, 'left = ', left, ' top = ', top
             break
     #for i in range(0, len(view_list)):
     #    print 'i = ',i, '-->', view_list[i]
     #    print '####################################'
     #print 'view_list = ', view_list
     return left, top
+
+
+dumpViewLayout('button')
