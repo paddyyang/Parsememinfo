@@ -51,7 +51,8 @@ def execLoop(loop_list):
                 elif temp[0] == "current":
                     if assert_top_activity(temp[1]) == False:
                         print "current activity is not the expected: ", temp[1]
-                        return
+                        debug_info()
+                        return;
                 j = j + 1
         i = i+1
             
@@ -64,12 +65,15 @@ def execCasePlan(file_name):
         in_loop = False
         loop_list = []
         while True:
-            line = f.readline()
+            line = f.readline().strip()
             if line:
-                temp = line.strip().split()
+                if line[0] == '#':
+                    continue
+                temp = line.split()
                 if temp[0] == "startloop":
                     if in_loop == True:
                         print 'error! only support plat loop'
+                        debug_info()
                         return
                     in_loop = True
                     loop_time = int(temp[1])
@@ -104,7 +108,18 @@ def execCasePlan(file_name):
                     else:
                         rop.back_key(int(temp[1]))
 
-        f.close()
+            else:
+                break
 
+        f.close()
+        print 'parseCasePlan ', file_name , " OVER!"
+
+
+def debug_info():
+     print "###########################################################"
+     print sys._getframe().f_code.co_filename
+     print sys._getframe().f_code.co_name
+     print sys._getframe().f_lineno
+     print "###########################################################"
 
 execCasePlan('case0.txt')
