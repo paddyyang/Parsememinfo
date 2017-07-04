@@ -19,9 +19,10 @@ def run_monkey_test():
     print 'run_monkey_test over!'
     return
 
-def generate_logs():
+def generate_logs(package_name):
     output_name = time.strftime('%Y-%m-%d-%H-%M-%S.meminfo',time.localtime(time.time()))
-    dump_cmd = "adb shell dumpsys meminfo -a | tee ./data/" + output_name
+    #dump_cmd = "adb shell dumpsys meminfo -a | tee ./data/" + output_name
+    dump_cmd = "adb shell dumpsys meminfo -a " + package_name + " | tee ./data/" + output_name
     #subprocess.call(dump_cmd, stdout=subprocess.PIPE, shell=True)
     os.system(dump_cmd)
     print 'collect_memoinfo over!'
@@ -51,7 +52,7 @@ else:
 
 for i in range(0, times):
     if(checkExist(package) > -1):
-            generate_logs()
+            generate_logs(package)
             time.sleep(interval)
     else:
             print "the test package: ", package, " doesn't exist!"

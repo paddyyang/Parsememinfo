@@ -18,15 +18,6 @@ class Color(Enum):
     ROTATE = 4
 
 
-#if(len(sys.argv) >= 2):
-#    option = sys.argv[1]
-#    if (option == 'rotate'):
-#        rotate()
-#    elif (option == 'restart'):
-#        restart()
-#    elif (option == 'tap'):
-#        tap(sys.argv[2])
-#
 
 def assert_top_activity(activity_name):
    current_activity = utop.topActivity(); 
@@ -37,7 +28,7 @@ def execLoop(loop_list):
     this_time = loop_list[0]
     print "execLoop time = ", this_time
     i = 0
-    while i< this_time:
+    while i< this_time or this_time == -1:
         j = 1
         while j < len(loop_list):
                 temp = loop_list[j].strip().split()
@@ -122,4 +113,8 @@ def debug_info():
      print sys._getframe().f_lineno
      print "###########################################################"
 
-execCasePlan('case0.txt')
+if(len(sys.argv) >= 2):
+    option = sys.argv[1]
+    execCasePlan(option)
+else:
+    print "Usage: run_case file_name"
