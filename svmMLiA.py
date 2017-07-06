@@ -69,7 +69,7 @@ def smoSimple(dataMatIn, classLabels, C, toler, maxIter):
         if (alphaPairsChanged == 0): iter += 1
         else: iter = 0
         print "iteration number: %d" % iter
-    return b,alphas
+    return float(b),alphas
 
 def kernelTrans(X, A, kTup): #calc the kernel or transform data to a higher dimensional space
     m,n = shape(X)
