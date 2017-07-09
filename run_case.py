@@ -21,10 +21,11 @@ class Color(Enum):
 def wait_top_activity(activity_name):
    current_activity = utop.topActivity(); 
    i = 0
-   while (current_activity != activity_name) and (i < 3):
-         time.sleep(2)
+   while (current_activity != activity_name) and (i < 20):
+         time.sleep(5)
          i = i + 1
          current_activity = utop.topActivity(); 
+         print 'current_activity: ', current_activity
    return current_activity == activity_name
 
 def assert_top_activity(activity_name):
