@@ -18,6 +18,14 @@ class Color(Enum):
     ROTATE = 4
 
 
+def wait_top_activity(activity_name):
+   current_activity = utop.topActivity(); 
+   i = 0
+   while (current_activity != activity_name) and (i < 3):
+         time.sleep(2)
+         i = i + 1
+         current_activity = utop.topActivity(); 
+   return current_activity == activity_name
 
 def assert_top_activity(activity_name):
    current_activity = utop.topActivity(); 
@@ -42,6 +50,11 @@ def execLoop(loop_list):
                 elif temp[0] == "current":
                     if assert_top_activity(temp[1]) == False:
                         print "current activity is not the expected: ", temp[1]
+                        debug_info()
+                        return;
+                elif temp[0] == "wait":
+                    if wait_top_activity(temp[1]) == False:
+                        print "wait activity is failed: ", temp[1]
                         debug_info()
                         return;
                 j = j + 1
@@ -82,6 +95,13 @@ def execCasePlan(file_name):
                     else:
                         if(assert_top_activity(temp[1]) == False):
                             print "current activity is not the expected: ", temp[1]
+                            return
+                elif temp[0] == "wait":
+                    if in_loop == True:
+                        loop_list.append(line.strip())
+                    else:
+                        if(wait_top_activity(temp[1]) == False):
+                            print "wait activity is failed: ", temp[1]
                             return
                 elif temp[0] == "click":
                     if in_loop == True:
