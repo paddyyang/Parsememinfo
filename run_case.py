@@ -39,6 +39,7 @@ def execLoop(loop_list):
     i = 0
     while i< this_time or this_time == -1:
         j = 1
+        wait_once = False
         while j < len(loop_list):
                 temp = loop_list[j].strip().split()
                 print "j = ", j , ": ", temp
@@ -57,13 +58,19 @@ def execLoop(loop_list):
                     if wait_top_activity(temp[1]) == False:
                         print "wait activity is failed: ", temp[1]
                         debug_info()
-                        rop.killHostPid('python run_test.py')
-                        return;
+                        if wait_once == False:
+                            j = j -1
+                            wait_once = True
+                            print "set wait_once to True"
+                            continue
+                        else:
+                            rop.killHostPid('python run_test.py')
+                            return
+                    else:
+                        wait_once = False
+
                 j = j + 1
         i = i+1
-            
-        
-    
 
 def execCasePlan(file_name):
         print 'parseCasePlan ', file_name
