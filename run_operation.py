@@ -39,6 +39,17 @@ def killPackage(package):
     os.system(op_cmd)
     return
 
+def killHostPid(pid_name):
+    cmd0 = "pidof " + pid_name
+    lines = os.popen(cmd0)
+    text = lines.readlines()
+    lines.close()
+
+    cmd0 = "kill -9 " + text[0]
+    os.system(cmd0)
+
+    return
+
 def startPackage(component):
     op_cmd = "adb shell am start -n " + component
     os.system(op_cmd)

@@ -57,6 +57,7 @@ def execLoop(loop_list):
                     if wait_top_activity(temp[1]) == False:
                         print "wait activity is failed: ", temp[1]
                         debug_info()
+                        rop.killHostPid('python run_test.py')
                         return;
                 j = j + 1
         i = i+1
@@ -103,6 +104,7 @@ def execCasePlan(file_name):
                     else:
                         if(wait_top_activity(temp[1]) == False):
                             print "wait activity is failed: ", temp[1]
+                            rop.killHostPid('python run_test.py')
                             return
                 elif temp[0] == "click":
                     if in_loop == True:
@@ -139,3 +141,4 @@ if(len(sys.argv) >= 2):
     execCasePlan(option)
 else:
     print "Usage: run_case file_name"
+rop.killHostPid('python run_test.py')
