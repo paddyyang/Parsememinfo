@@ -1,0 +1,59 @@
+Applications Memory Usage (kB):
+Uptime: 9712828 Realtime: 9712823
+
+** MEMINFO in pid 22899 [com.pyzed.memoryleaktest] **
+                   Pss      Pss   Shared  Private   Shared  Private  Swapped     Heap     Heap     Heap
+                 Total    Clean    Dirty    Dirty    Clean    Clean    Dirty     Size    Alloc     Free
+                ------   ------   ------   ------   ------   ------   ------   ------   ------   ------
+  Native Heap    21367        0     1564    21304        0        0        0    23780    23395      384
+  Dalvik Heap    13518        0     6424    13448        0        0        0    31882    19571    12311
+ Dalvik Other      804        0       36      804        0        0        4                           
+        Stack      916        0        0      916        0        0        0                           
+       Ashmem        2        0        4        0        0        0        0                           
+      Gfx dev     1776        0        0     1776        0        0        0                           
+    Other dev        4        0       48        0        0        4        0                           
+     .so mmap      778        8     2532      152     6856        8        8                           
+    .apk mmap      209       40        0        0     2276       40        0                           
+    .ttf mmap       76       64        0        0       24       64        0                           
+    .dex mmap       36       32        0        4        0       32        0                           
+    .oat mmap     1862      756        4        0     9768      756        0                           
+    .art mmap     1012       16     1288      568     7604       16       24                           
+   Other mmap       33        0        8        8      252        0        0                           
+   EGL mtrack    17088        0        0    17088        0        0        0                           
+      Unknown      803        0      436      784        0        0        0                           
+        TOTAL    60284      916    12344    56852    26780      920       36    55662    42966    12695
+ 
+ Dalvik Details
+        .Heap    13084        0        0    13084        0        0        0                           
+         .LOS      119        0     4652       96        0        0        0                           
+ .LinearAlloc       40        0       32       40        0        0        4                           
+          .GC      424        0        0      424        0        0        0                           
+      .Zygote      283        0     1772      236        0        0        0                           
+   .NonMoving       32        0        0       32        0        0        0                           
+ .IndirectRef      340        0        4      340        0        0        0                           
+ 
+ App Summary
+                       Pss(KB)
+                        ------
+           Java Heap:    14032
+         Native Heap:    21304
+                Code:     1056
+               Stack:      916
+            Graphics:    18864
+       Private Other:     1600
+              System:     2512
+ 
+               TOTAL:    60284      TOTAL SWAP (KB):       36
+ 
+ Objects
+               Views:     4323         ViewRootImpl:        1
+         AppContexts:      146           Activities:      144
+              Assets:        4        AssetManagers:        2
+       Local Binders:      129        Proxy Binders:      158
+       Parcel memory:        6         Parcel count:       25
+    Death Recipients:        0      OpenSSL Sockets:        0
+ 
+ SQL
+         MEMORY_USED:        0
+  PAGECACHE_OVERFLOW:        0          MALLOC_SIZE:        0
+ 
