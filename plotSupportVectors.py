@@ -32,7 +32,7 @@ fr.close()
 
 #run smo algorithm
 dataArr,labelArr = sma.loadDataSet('out.csv')
-b,alphas = sma.smoSimple(dataArr, labelArr, 0.6, 0.001, 40)
+b,alphas = sma.smoP(dataArr, labelArr, 0.001, 0, 4000000000)
 ws= sma.calcWs(alphas,dataArr,labelArr)
 print 'b = ', b 
 print 'ws =', ws

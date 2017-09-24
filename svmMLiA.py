@@ -172,7 +172,7 @@ def smoP(dataMatIn, classLabels, C, toler, maxIter,kTup=('lin', 0)):    #full Pl
         if entireSet: entireSet = False #toggle entire set loop
         elif (alphaPairsChanged == 0): entireSet = True  
         print "iteration number: %d" % iter
-    return oS.b,oS.alphas
+    return float(oS.b),oS.alphas
 
 def calcWs(alphas,dataArr,classLabels):
     X = mat(dataArr); labelMat = mat(classLabels).transpose()
