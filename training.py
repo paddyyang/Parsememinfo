@@ -63,7 +63,16 @@ def train_sample(mydir):
                 if sub_size == 1:
                         test_memory_delta = [item[0] for item in delta]
                         test_memory_times = [i for i in range(len(delta))]
-                        plt.scatter(test_memory_times, test_memory_delta)
+                        #plt.scatter(test_memory_times, test_memory_delta)
+                        plt.plot(test_memory_times, test_memory_delta, marker='o', mec='r', mfc='w')
+                        plt.show()
+
+                        show_memory = [item[0] for item in ex1]
+                        show_times = [i for i in range(len(ex1))]
+                        print 'show_memory =', show_memory
+                        print 'show_times =', show_times
+                        #plt.scatter(show_times, show_memory)
+                        plt.plot(show_times, show_memory, marker='o', mec='r', mfc='w')
                         plt.show()
 
 
