@@ -45,7 +45,7 @@ def train_sample(mydir):
                 print 'package == ', package
 
 
-                ex1 = codata.get_training_data(package, './data/' + dir_name )
+                ex1, files = codata.get_training_data(package, './data/' + dir_name )
 
                 print 'ex1 = ', ex1
 
@@ -59,20 +59,37 @@ def train_sample(mydir):
                     # objects number increase
                     delta[i][1] = (ex1[i+1][1] - ex1[i][1])
 
+                    #hint to break points for objects
+                    if abs(delta[i][1]) > 150:
+                        print '\npossible break points is ',files[i], ' to ', files[i+1], 'index is ', i, '(', ex1[i][1], ' to ', ex1[i+1][1], ')\n'
+                    
+
                 print 'delta = ', delta
                 if sub_size == 1:
-                        test_memory_delta = [item[0] for item in delta]
-                        test_memory_times = [i for i in range(len(delta))]
-                        #plt.scatter(test_memory_times, test_memory_delta)
-                        plt.plot(test_memory_times, test_memory_delta, marker='o', mec='r', mfc='w')
-                        plt.show()
+                       # test_memory_delta = [item[0] for item in delta]
+                       # test_memory_times = [i for i in range(len(delta))]
+                       # #plt.scatter(test_memory_times, test_memory_delta)
+                       # plt.plot(test_memory_times, test_memory_delta, marker='o', mec='r', mfc='w')
+                       # plt.show()
 
                         show_memory = [item[0] for item in ex1]
+                        show_object = [item[1] for item in ex1]
                         show_times = [i for i in range(len(ex1))]
+                        print '\n\n'
                         print 'show_memory =', show_memory
+                        print '\n\n'
+                        print 'show_object =', show_object
+                        print '\n\n'
                         print 'show_times =', show_times
+                        print '\n\n'
                         #plt.scatter(show_times, show_memory)
+                        plt.title('memory usage')
                         plt.plot(show_times, show_memory, marker='o', mec='r', mfc='w')
+                        plt.show()
+
+
+                        plt.title('objects usage')
+                        plt.plot(show_times, show_object, marker='o', mec='r', mfc='w')
                         plt.show()
 
 

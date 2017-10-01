@@ -35,7 +35,7 @@ def get_training_data(pid_name, data_dir):
                         example[exa_index][0] = 0
                         example[exa_index][1] = 0
 
-    return example
+    return example, files
 
 
 

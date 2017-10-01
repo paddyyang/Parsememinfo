@@ -25,6 +25,8 @@ def generate_logs(package_name):
     dump_cmd = "adb shell dumpsys meminfo -a " + package_name + " | tee ./data/" + output_name
     #subprocess.call(dump_cmd, stdout=subprocess.PIPE, shell=True)
     os.system(dump_cmd)
+    dump_cmd0 = "adb shell logcat -v time  -d  > ./data/" + output_name + ".log"
+    os.system(dump_cmd0)
     print 'collect_memoinfo over!'
     return
 
