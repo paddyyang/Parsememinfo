@@ -1,0 +1,57 @@
+Applications Memory Usage (kB):
+Uptime: 43193006 Realtime: 194741139
+
+** MEMINFO in pid 29079 [com.pyzed.memoryleaktest] **
+                   Pss      Pss   Shared  Private   Shared  Private  Swapped     Heap     Heap     Heap
+                 Total    Clean    Dirty    Dirty    Clean    Clean    Dirty     Size    Alloc     Free
+                ------   ------   ------   ------   ------   ------   ------   ------   ------   ------
+  Native Heap    56921        0     1228    56884        0        0    31736   151464   151035      428
+  Dalvik Heap    90749        0     1376    90696        0        0     9212    98304    98293       11
+ Dalvik Other     3980        0       36     3980        0        0       36                           
+        Stack      144        0        0      144        0        0       60                           
+      Gfx dev     1772        0        0     1772        0        0        0                           
+    Other dev        5        0       52        0        0        4        0                           
+     .so mmap      366       12      332      100     4472       12     2260                           
+    .apk mmap      161       48        0        0     1716       48        0                           
+    .dex mmap        0        0        0        0        0        0        4                           
+    .oat mmap      467      148        0        0     4384      148        4                           
+    .art mmap      939       80     1208      488     5684       80      164                           
+   Other mmap        8        0        8        4      140        0        4                           
+   EGL mtrack    19940        0        0    19940        0        0        0                           
+      Unknown    42039        0      128    42036        0        0    19248                           
+        TOTAL   217491      288     4368   216044    16396      292    62728   249768   249328      439
+ 
+ Dalvik Details
+        .Heap    89564        0        0    89564        0        0     4960                           
+         .LOS       24        0      924       24        0        0     3760                           
+ .LinearAlloc        8        0       32        8        0        0       32                           
+          .GC     3900        0        0     3900        0        0        4                           
+      .Zygote     1125        0      452     1072        0        0      484                           
+   .NonMoving       36        0        0       36        0        0        8                           
+ .IndirectRef       72        0        4       72        0        0        0                           
+ 
+ App Summary
+                       Pss(KB)
+                        ------
+           Java Heap:    91264
+         Native Heap:    56884
+                Code:      308
+               Stack:      144
+            Graphics:    21712
+       Private Other:    46024
+              System:     1155
+ 
+               TOTAL:   217491      TOTAL SWAP (KB):    62728
+ 
+ Objects
+               Views:    33362         ViewRootImpl:        2
+         AppContexts:     1114           Activities:     1112
+              Assets:        4        AssetManagers:        2
+       Local Binders:      305        Proxy Binders:     1127
+       Parcel memory:        6         Parcel count:       27
+    Death Recipients:        0      OpenSSL Sockets:        0
+ 
+ SQL
+         MEMORY_USED:        0
+  PAGECACHE_OVERFLOW:        0          MALLOC_SIZE:        0
+ 
