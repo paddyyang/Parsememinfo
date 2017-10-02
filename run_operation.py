@@ -40,13 +40,28 @@ def killPackage(package):
     return
 
 def killHostPid(pid_name):
-    cmd0 = "pidof " + pid_name
-    lines = os.popen(cmd0)
-    text = lines.readlines()
-    lines.close()
+    print 'sys.platform = ', sys.platform, ',' ,pid_name
+    if 'darwin' in sys.platform:
+            cmd0 = "ps -ef | grep '" + pid_name + "'"
+            lines = os.popen(cmd0)
+            text = lines.readlines()
+            lines.close()
 
-    cmd0 = "kill -9 " + text[0]
-    os.system(cmd0)
+            for str_ps in text:
+                if str_ps.find('MacOS') > -1:
+                    fields = str_ps.split();
+                    cmd0 = "kill -9 " + fields[1]
+                    print 'killHostPid cmd is  ', cmd0 
+                    os.system(cmd0)
+
+    else: 
+            cmd0 = "pidof " + pid_name
+            lines = os.popen(cmd0)
+            text = lines.readlines()
+            lines.close()
+
+            cmd0 = "kill -9 " + text[0]
+            os.system(cmd0)
 
     return
 
@@ -89,5 +104,7 @@ if(len(sys.argv) >= 2):
         restart()
     elif (option == 'tap'):
         tap(sys.argv[2])
+    else:
+        killHostPid('Python run_test.py')
 
 
