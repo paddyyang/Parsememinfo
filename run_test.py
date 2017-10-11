@@ -12,21 +12,16 @@ import collect_data as codata
 import parseConfig as pc
 import utils_top_activity as utop
 
-def run_monkey_test():
-    monkey_cmd = 'adb shell monkey --ignore-crashes --ignore-timeouts --kill-process-after-error  --ignore-security-exceptions --throttle 1000 -v -v -v -s 5 1000 1'
-    #os.system(monkey_cmd)
-    subprocess.call(monkey_cmd, shell=True)
-    print 'run_monkey_test over!'
-    return
-
-def generate_logs(package_name):
+def generate_logs(package_name, log):
     output_name = time.strftime('%Y-%m-%d-%H-%M-%S.meminfo',time.localtime(time.time()))
     #dump_cmd = "adb shell dumpsys meminfo -a | tee ./data/" + output_name
     dump_cmd = "adb shell dumpsys meminfo -a " + package_name + " | tee ./data/" + output_name
     #subprocess.call(dump_cmd, stdout=subprocess.PIPE, shell=True)
     os.system(dump_cmd)
-    dump_cmd0 = "adb shell logcat -v time  -d  > ./data/" + output_name + ".log"
-    os.system(dump_cmd0)
+
+    if (log):
+            dump_cmd0 = "adb shell logcat -v time  -d  > ./data/" + output_name + ".log"
+            os.system(dump_cmd0)
     print 'collect_memoinfo over!'
     return
 
@@ -54,7 +49,7 @@ else:
 
 for i in range(0, times):
     if(checkExist(package) > -1):
-            generate_logs(package)
+            generate_logs(package, False)
             time.sleep(interval)
     else:
             print "the test package: ", package, " doesn't exist!"

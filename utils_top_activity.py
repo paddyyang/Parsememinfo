@@ -23,5 +23,5 @@ def topActivity():
     return component
 
 
-test_name = topActivity()
-print test_name
+#test_name = topActivity()
+#print test_name

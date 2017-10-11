@@ -140,4 +140,4 @@ def dumpViewLayout(view_id):
     return left, top
 
 
-dumpViewLayout('button')
+#dumpViewLayout('button')

@@ -6,6 +6,7 @@ import math
 
 import utils_top_activity as utop
 import utils_hiview as uhi
+import parseConfig as pc
 
 #delay for 3 second
 operation_delay = 1
@@ -96,6 +97,19 @@ def back_key(back_times):
            i = i + 1
         
 
+def run_monkey_test():
+    times, interval, package_name, memory_kb = pc.get_config()
+    if(package_name != ''): 
+        monkey_cmd = "adb shell monkey -p " +  package_name + " --ignore-crashes --ignore-timeouts --kill-process-after-error  --ignore-security-exceptions --throttle 5000 --pct-touch 70 --pct-syskeys 20 --pct-anyevent 10 -v -v -v -s 5 1000 1000"
+        print 'monkey_cmd =', monkey_cmd
+    else:
+        monkey_cmd = 'adb shell monkey --ignore-crashes --ignore-timeouts --kill-process-after-error  --ignore-security-exceptions --throttle 1000 --pct-touch 70 --pct-syskeys 20 --pct-anyevent 10 -v -v -v -s 5 1000 1000'
+
+    #os.system(monkey_cmd)
+    subprocess.call(monkey_cmd, shell=True)
+    print 'run_monkey_test over!'
+    return
+
 if(len(sys.argv) >= 2):
     option = sys.argv[1]
     if (option == 'rotate'):
@@ -104,6 +118,8 @@ if(len(sys.argv) >= 2):
         restart()
     elif (option == 'tap'):
         tap(sys.argv[2])
+    elif (option == 'monkey'):
+        run_monkey_test()
     else:
         killHostPid('Python run_test.py')
 
