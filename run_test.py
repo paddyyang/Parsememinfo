@@ -48,12 +48,14 @@ else:
         times, interval, package, memory_kb = pc.get_config()
 
 for i in range(0, times):
-    if(checkExist(package) > -1):
-            generate_logs(package, False)
-            time.sleep(interval)
-    else:
+    error_iter = 0
+    while checkExist(package) < 0 :
             print "the test package: ", package, " doesn't exist!"
+            error_iter = error_iter + 1
+            if error_iter > 100:
+                exit(1)
             generate_error_log()
-            break
+            time.sleep(5)
 
-
+    generate_logs(package, False)
+    time.sleep(interval)

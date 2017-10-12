@@ -100,7 +100,7 @@ def back_key(back_times):
 def run_monkey_test():
     times, interval, package_name, memory_kb = pc.get_config()
     if(package_name != ''): 
-        monkey_cmd = "adb shell monkey -p " +  package_name + " --ignore-crashes --ignore-timeouts --kill-process-after-error  --ignore-security-exceptions --throttle 5000 --pct-touch 70 --pct-syskeys 20 --pct-anyevent 10 -v -v -v -s 5 1000 1000"
+        monkey_cmd = "adb shell monkey -p " +  package_name + " --ignore-crashes --ignore-timeouts --kill-process-after-error  --ignore-security-exceptions --throttle 2000 --pct-touch 70 --pct-syskeys 20 --pct-anyevent 10 -v -v -v -s 5 100000000 100000000"
         print 'monkey_cmd =', monkey_cmd
     else:
         monkey_cmd = 'adb shell monkey --ignore-crashes --ignore-timeouts --kill-process-after-error  --ignore-security-exceptions --throttle 1000 --pct-touch 70 --pct-syskeys 20 --pct-anyevent 10 -v -v -v -s 5 1000 1000'
