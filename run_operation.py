@@ -88,6 +88,11 @@ def tap(view_id):
            os.system(op_cmd)
            time.sleep(operation_delay);
 
+def clickxy(x, y):
+           op_cmd = "adb shell input tap " + x + ' ' + y
+           os.system(op_cmd)
+           time.sleep(operation_delay);
+
 def back_key(back_times):
     i = 0
     op_cmd = "adb shell input keyevent BACK"
@@ -95,7 +100,36 @@ def back_key(back_times):
            os.system(op_cmd)
            time.sleep(operation_delay);
            i = i + 1
+
+def menu_key(back_times):
+    i = 0
+    op_cmd = "adb shell input keyevent MENU"
+    while i < int(back_times):
+           os.system(op_cmd)
+           time.sleep(operation_delay);
+           i = i + 1
+def home_key(back_times):
+    i = 0
+    op_cmd = "adb shell input keyevent HOME"
+    while i < int(back_times):
+           os.system(op_cmd)
+           time.sleep(operation_delay);
+           i = i + 1
         
+def back_hold(back_times, hold_activity):
+    i = 0
+    op_cmd = "adb shell input keyevent BACK"
+    loop_inf = False
+
+    if back_times == -1:
+        loop_inf = True
+    while (i < int(back_times)) or loop_inf:
+           top_component = utop.topActivity() 
+           if top_component == hold_activity :
+                break
+           os.system(op_cmd)
+           time.sleep(operation_delay);
+           i = i + 1
 
 def run_monkey_test():
     times, interval, package_name, memory_kb = pc.get_config()
@@ -110,17 +144,17 @@ def run_monkey_test():
     print 'run_monkey_test over!'
     return
 
-if(len(sys.argv) >= 2):
-    option = sys.argv[1]
-    if (option == 'rotate'):
-        rotate()
-    elif (option == 'restart'):
-        restart()
-    elif (option == 'tap'):
-        tap(sys.argv[2])
-    elif (option == 'monkey'):
-        run_monkey_test()
-    else:
-        killHostPid('Python run_test.py')
-
+#if(len(sys.argv) >= 2):
+#    option = sys.argv[1]
+#    if (option == 'rotate'):
+#        rotate()
+#    elif (option == 'restart'):
+#        restart()
+#    elif (option == 'tap'):
+#        tap(sys.argv[2])
+#    elif (option == 'monkey'):
+#        run_monkey_test()
+#    else:
+#        killHostPid('Python run_test.py')
+#
 

@@ -45,10 +45,14 @@ def execLoop(loop_list):
                 print "j = ", j , ": ", temp
                 if temp[0] == "click":
                     rop.tap(temp[1])
+                elif temp[0] == "clickxy":
+                    rop.clickxy(temp[1], temp[2])
                 elif temp[0] == "rotate":
                     rop.rotate(int(temp[1]))
                 elif temp[0] == "back":
                     rop.back_key(int(temp[1]))
+                elif temp[0] == "back_hold":
+                    rop.back_hold(int(temp[1]), temp[2])
                 elif temp[0] == "current":
                     if assert_top_activity(temp[1]) == False:
                         print "current activity is not the expected: ", temp[1]
@@ -118,6 +122,11 @@ def execCasePlan(file_name):
                         loop_list.append(line.strip())
                     else:
                         rop.tap(temp[1])
+                elif temp[0] == "clickxy":
+                    if in_loop == True:
+                        loop_list.append(line.strip())
+                    else:
+                        rop.clickxy(temp[1], temp[2])
                 elif temp[0] == "rotate":
                     if in_loop == True:
                         loop_list.append(line.strip())
@@ -128,6 +137,11 @@ def execCasePlan(file_name):
                         loop_list.append(line.strip())
                     else:
                         rop.back_key(int(temp[1]))
+                elif temp[0] == "back_hold":
+                    if in_loop == True:
+                        loop_list.append(line.strip())
+                    else:
+                        rop.back_hold(int(temp[1]), temp[2])
 
             else:
                 break
