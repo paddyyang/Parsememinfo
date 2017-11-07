@@ -96,18 +96,19 @@ def train_sample(mydir):
                 delta_heaps = [item[0] for item in delta]
                 delta_objects = [item[1] for item in delta]
                 #now we compute memory area for increase or decrease
-                inc_area = 0.0
-                total_area = 0.0
-                for i in range(0, len(delta)):
-                    if i == 0:
-                        inc_area = inc_area + uarea.compute(0, delta_heaps[i])
-                        total_area = total_area + uarea.compute_all(0, delta_heaps[i])
-                    else:
-                        inc_area = inc_area + uarea.compute(delta_heaps[i-1], delta_heaps[i])
-                        total_area = total_area + uarea.compute_all(delta_heaps[i-1], delta_heaps[i])
-                        
-                inc_memory_ratio = inc_area / total_area
-                print 'inc_memory_ratio = ', inc_memory_ratio
+                #inc_area = 0.0
+                #total_area = 0.0
+                #for i in range(0, len(delta)):
+                #    if i == 0:
+                #        inc_area = inc_area + uarea.compute(0, delta_heaps[i])
+                #        total_area = total_area + uarea.compute_all(0, delta_heaps[i])
+                #    else:
+                #        inc_area = inc_area + uarea.compute(delta_heaps[i-1], delta_heaps[i])
+                #        total_area = total_area + uarea.compute_all(delta_heaps[i-1], delta_heaps[i])
+                #        
+                #inc_memory_ratio = inc_area / total_area
+                #print 'inc_memory_ratio = ', inc_memory_ratio
+                inc_memory_ratio = uarea.compute_array(ex1)
 
                 a_heaps = [item[0] for item in ex1]
                 a_objects = [item[1] for item in ex1]
