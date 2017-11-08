@@ -27,7 +27,7 @@ def train_sample(mydir):
             sub_dirs.append(mydir)
             sub_size = 1
 
-        data_mat = [[0 for i in range(4)] for j in range(sub_size)]
+        data_mat = [[0 for i in range(5)] for j in range(sub_size)]
         data_index = -1
 
         print 'sub_dirs = ', sub_dirs
@@ -108,7 +108,7 @@ def train_sample(mydir):
                 #        
                 #inc_memory_ratio = inc_area / total_area
                 #print 'inc_memory_ratio = ', inc_memory_ratio
-                inc_memory_ratio = uarea.compute_array(ex1)
+                inc_memory_ratio, inc_memory_ratio1 = uarea.compute_array(ex1)
 
                 a_heaps = [item[0] for item in ex1]
                 a_objects = [item[1] for item in ex1]
@@ -122,20 +122,22 @@ def train_sample(mydir):
 
                 data_index = data_index + 1
                 #format: delta mean ratio, corr, delta times ratio, lean or not, sample label
-                data_mat[data_index] = [inc_memory_ratio, a_corr, delta_times_ratio, leak_memory, dir_name]
+                data_mat[data_index] = [inc_memory_ratio,inc_memory_ratio1,a_corr, delta_times_ratio, leak_memory, dir_name]
 
 
         print 'data_matrix = ', data_mat
 
 
         delta_mean_ratio = [x[0] for x in data_mat]
-        a_corr = [x[1] for x in data_mat]
-        delta_times_ratio = [x[2] for x in data_mat]
-        a_leak_memory = [x[3] for x in data_mat]
-        a_dir_name = [x[4] for x in data_mat]
+        delta_mean_ratio1 = [x[1] for x in data_mat]
+        a_corr = [x[2] for x in data_mat]
+        delta_times_ratio = [x[3] for x in data_mat]
+        a_leak_memory = [x[4] for x in data_mat]
+        a_dir_name = [x[5] for x in data_mat]
 
         df = pd.DataFrame()
         df['inc_memory_ratio'] = delta_mean_ratio
+        df['inc_memory_ratio_value'] = delta_mean_ratio1
         df['a_corr'] = a_corr
         df['delta_times_ratio'] = delta_times_ratio
         df['a_leak_memory'] = a_leak_memory

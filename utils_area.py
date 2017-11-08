@@ -44,7 +44,9 @@ def compute_sign(value):
 def compute_entropy(ex1):
                 data_array = [[0 for i in range(len(ex1[0]))] for j in range(len(ex1)-1)]
                 entropy_array = [[0 for i in range(len(ex1[0]))] for j in range(len(ex1)-1)]
+                entropy_array_value = [[0 for i in range(len(ex1[0]))] for j in range(len(ex1)-1)]
                 entropy_sum = [0 for i in range(len(ex1[0]))]
+                entropy_sum_value = [0 for i in range(len(ex1[0]))]
                 for i in range(0, len(data_array)):
                     data_array[i][0] = (ex1[i+1][0] - ex1[i][0])
                     #data_array[i][1] = (ex1[i+1][1] - ex1[i][1])
@@ -56,33 +58,22 @@ def compute_entropy(ex1):
                 for i in range(0, len(entropy_array)):
                     if data_array[i][0] == 0:
                         entropy_array[i][0]  = 0.0
+                        entropy_array_value[i][0]  = 0.0
                     else:
-                        entropy_array[i][0] = -1.0*math.log(1.0 * abs(data_array[i][0])/entropy_sum[0], 2) * \
-                                                                            compute_sign(data_array[i][0])
-                    #entropy_array[i][1] = -1.0*math.log(1.0 * abs(data_array[i][1])/entropy_sum[1], 2) 
+                        p = 1.0 * abs(data_array[i][0])/entropy_sum[0]
+                        #print "p = ", p
+                        entropy_array[i][0] = -1.0*math.log(p, 2) * compute_sign(data_array[i][0])
+                        entropy_array_value[i][0]  = p * entropy_array[i][0]
+                        #entropy_array[i][1] = -1.0*math.log(1.0 * abs(data_array[i][1])/entropy_sum[1], 2) 
 
                 print "entropy_array: ", entropy_array
+                print "\n\n\n"
+                #print "entropy_array_value: ", entropy_array_value
+                return entropy_array, entropy_array_value
 
-                #for i in range(0, len(entropy_array)):
-                #    entropy_array[i][0] =  entropy_array[i][0] * data_array[i][0] 
-                #    entropy_array[i][1] =  entropy_array[i][1] * data_array[i][1] 
-
-
-                return entropy_array
-                
-def compute_array(ex1):
-                #now we compute memory area for increase or decrease
+def compute_sign_area(data_array):
                 inc_area = 0.0
                 total_area = 0.0
-
-                #data_array = [[0.0 for i in range(len(ex1[0]))] for j in range(len(ex1)-1)]
-                #for i in range(0, len(data_array)):
-                #    # heap memory increase
-                #    data_array[i][0] = (ex1[i+1][0] - ex1[i][0])
-                #    # objects number increase
-                #    data_array[i][1] = (ex1[i+1][1] - ex1[i][1])
-                data_array = compute_entropy(ex1)
-
                 for i in range(0, len(data_array)):
                     if i == 0:
                         inc_area = inc_area + compute(0, data_array[i][0])
@@ -95,6 +86,27 @@ def compute_array(ex1):
                 print 'inc_memory_ratio = ', inc_memory_ratio
                 return inc_memory_ratio
 
+def compute_array(ex1):
+                #now we compute memory area for increase or decrease
+                data_array, data_array_value = compute_entropy(ex1)
+                inc_memory_ratio = compute_sign_area(data_array)
+
+                data_array2 = compute_delta(ex1)
+                inc_memory_ratio2 = compute_sign_area(data_array2)
+                print "data_array2 = ", data_array2
+                #sum_value_abs = 0.0
+                #sum_value = 0.0
+                ##data_array_value = data_array
+                #for i in range(0, len(data_array)):
+                #    sum_value_abs = sum_value_abs + abs(data_array[i][0])
+                #    sum_value = sum_value + data_array[i][0]
+                #    #print "i = ",i, ", data =", data_array[i][0] , " sum = ", sum_value
+                #
+                #print "sum_value = ", sum_value
+                #print "sum_value_abs = ", sum_value_abs
+                #inc_memory_ratio1 = sum_value/sum_value_abs
+                return inc_memory_ratio, inc_memory_ratio2
+
 # test
 area1 = compute(3, 4)
 print 'area1 = ', area1
@@ -104,4 +116,5 @@ area3 = compute(3, 3)
 print 'area3 = ', area3
 
 a1=[[1,0], [2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0],[100,0],[9,0]]
-compute_array(a1)
+result1, result2 = compute_array(a1)
+print result2
