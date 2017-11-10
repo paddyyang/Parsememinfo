@@ -1,0 +1,58 @@
+Applications Memory Usage (kB):
+Uptime: 1522643 Realtime: 1522639
+
+** MEMINFO in pid 12115 [cx.hell.android.pdfview] **
+                   Pss      Pss   Shared  Private   Shared  Private  Swapped     Heap     Heap     Heap
+                 Total    Clean    Dirty    Dirty    Clean    Clean    Dirty     Size    Alloc     Free
+                ------   ------   ------   ------   ------   ------   ------   ------   ------   ------
+  Native Heap    80257        0     1744    80196        0        0    15696   458420   458201      218
+  Dalvik Heap    13380        0     6448    13268        0        0      188    20472    20000      472
+ Dalvik Other      381        0       36      380        0        0        8                           
+        Stack      136        0        0      136        0        0       28                           
+    Other dev        4        0       44        0        0        4        0                           
+     .so mmap     1438      916     2292      132     5376      916      300                           
+    .apk mmap      286       64        0        0     2156       64        0                           
+    .dex mmap      160      160        0        0        0      160        4                           
+    .oat mmap     1325      456        0        0     9016      456        4                           
+    .art mmap     1106      308     1244      456     6416      308      112                           
+   Other mmap       35        0        8        4      228       24        4                           
+      Unknown   234427        0      192   234424        0        0   112240                           
+        TOTAL   332935     1904    12008   328996    23192     1932   128584   478892   478201      690
+ 
+ Dalvik Details
+        .Heap     1268        0        0     1268        0        0       48                           
+         .LOS    11837        0     4652    11788        0        0      128                           
+ .LinearAlloc       41        0       32       40        0        0        8                           
+          .GC      296        0        0      296        0        0        0                           
+      .Zygote      263        0     1796      200        0        0       12                           
+   .NonMoving       12        0        0       12        0        0        0                           
+ .IndirectRef       44        0        4       44        0        0        0                           
+ 
+ App Summary
+                       Pss(KB)
+                        ------
+           Java Heap:    14032
+         Native Heap:    80196
+                Code:     1728
+               Stack:      136
+            Graphics:        0
+       Private Other:   234836
+              System:     2007
+ 
+               TOTAL:   332935      TOTAL SWAP (KB):   128584
+ 
+ Objects
+               Views:      119         ViewRootImpl:        1
+         AppContexts:        3           Activities:        1
+              Assets:        4        AssetManagers:        2
+       Local Binders:       45        Proxy Binders:       15
+       Parcel memory:        4         Parcel count:       19
+    Death Recipients:        0      OpenSSL Sockets:        0
+ 
+ SQL
+         MEMORY_USED:        0
+  PAGECACHE_OVERFLOW:        0          MALLOC_SIZE:       62
+ 
+ 
+ Asset Allocations
+    zip:/data/app/cx.hell.android.pdfview-2/base.apk:/resources.arsc: 18K
