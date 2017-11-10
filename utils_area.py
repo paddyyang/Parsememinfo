@@ -86,14 +86,28 @@ def compute_sign_area(data_array):
                 print 'inc_memory_ratio = ', inc_memory_ratio
                 return inc_memory_ratio
 
+def compute_sign_entropy(data_array):
+                inc_area = 0.0
+                total_area = 0.0
+                for i in range(0, len(data_array)):
+                        inc_area = inc_area + data_array[i][0]
+                        total_area = total_area + abs(data_array[i][0])
+                        
+                inc_memory_ratio = inc_area / total_area
+                print 'inc_memory_ratio = ', inc_memory_ratio
+                return inc_memory_ratio
+
 def compute_array(ex1):
                 #now we compute memory area for increase or decrease
                 data_array, data_array_value = compute_entropy(ex1)
-                inc_memory_ratio = compute_sign_area(data_array)
+                inc_memory_ratio = compute_sign_entropy(data_array)
 
                 data_array2 = compute_delta(ex1)
                 inc_memory_ratio2 = compute_sign_area(data_array2)
-                print "data_array2 = ", data_array2
+
+                #inc_memory_ratio2 = compute_sign_entropy(data_array_value)
+                #print "data_array2 = ", data_array2
+
                 #sum_value_abs = 0.0
                 #sum_value = 0.0
                 ##data_array_value = data_array

@@ -12,9 +12,10 @@ def loadDataSet(fileName):
     for line in fr.readlines():
         #lineArr = line.strip().split('\t')
         lineArr = line.strip().split(',')
+        #dataMat.append([float(lineArr[0]), float(lineArr[1]),float(lineArr[2])])
         dataMat.append([float(lineArr[0]), float(lineArr[1])])
         #labelMat.append(float(lineArr[2]))
-        labelMat.append(float(lineArr[3]))
+        labelMat.append(float(lineArr[4]))
     return dataMat,labelMat
 
 def selectJrand(i,m):
@@ -183,8 +184,9 @@ def calcWs(alphas,dataArr,classLabels):
     return w
 
 def testRbf(k1=1.3):
-    dataArr,labelArr = loadDataSet('testSetRBF.txt')
-    b,alphas = smoP(dataArr, labelArr, 200, 0.0001, 10000, ('rbf', k1)) #C=200 important
+    #dataArr,labelArr = loadDataSet('testSetRBF.txt')
+    dataArr,labelArr = loadDataSet('out.csv')
+    b,alphas = smoP(dataArr, labelArr, 200, 0.0001, 10000, ('lin', k1)) #C=200 important
     datMat=mat(dataArr); labelMat = mat(labelArr).transpose()
     svInd=nonzero(alphas.A>0)[0]
     sVs=datMat[svInd] #get matrix of only support vectors
@@ -197,7 +199,7 @@ def testRbf(k1=1.3):
         predict=kernelEval.T * multiply(labelSV,alphas[svInd]) + b
         if sign(predict)!=sign(labelArr[i]): errorCount += 1
     print "the training error rate is: %f" % (float(errorCount)/m)
-    dataArr,labelArr = loadDataSet('testSetRBF2.txt')
+    dataArr,labelArr = loadDataSet('out.csv')
     errorCount = 0
     datMat=mat(dataArr); labelMat = mat(labelArr).transpose()
     m,n = shape(datMat)
@@ -347,3 +349,6 @@ def smoPK(dataMatIn, classLabels, C, toler, maxIter):    #full Platt SMO
         elif (alphaPairsChanged == 0): entireSet = True  
         print "iteration number: %d" % iter
     return oS.b,oS.alphas
+
+
+testRbf(k1=1.3)
