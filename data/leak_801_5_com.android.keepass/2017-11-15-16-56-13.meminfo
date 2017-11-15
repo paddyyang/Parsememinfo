@@ -1,0 +1,63 @@
+Applications Memory Usage (kB):
+Uptime: 3813979 Realtime: 3813976
+
+** MEMINFO in pid 5964 [com.android.keepass] **
+                   Pss      Pss   Shared  Private   Shared  Private  Swapped     Heap     Heap     Heap
+                 Total    Clean    Dirty    Dirty    Clean    Clean    Dirty     Size    Alloc     Free
+                ------   ------   ------   ------   ------   ------   ------   ------   ------   ------
+  Native Heap     3966        0     1704     3924        0        0        0     4432     4161      270
+  Dalvik Heap     2737        0     6464     2672        0        0        0    14586     9368     5218
+ Dalvik Other      304        0       36      304        0        0        4                           
+        Stack      204        0        0      204        0        0        0                           
+       Cursor        4        0        0        4        0        0        0                           
+    Other dev        4        0       44        0        0        4        0                           
+     .so mmap      796      240     2552      164     5872      240        8                           
+    .apk mmap      355      112        0        0     2432      112        0                           
+    .ttf mmap      195       64        0        0      348       64        0                           
+    .dex mmap      296      292        0        4        0      292        0                           
+    .oat mmap     2637     1552        4        0    10696     1552        0                           
+    .art mmap     1351      340     1228      744     7216      340       20                           
+   Other mmap       65        0        8        8      256       52        0                           
+      Unknown      352        0      444      344        0        0        0                           
+        TOTAL    13266     2600    12484     8372    26820     2656       32    19018    13529     5488
+ 
+ Dalvik Details
+        .Heap     1448        0        0     1448        0        0        0                           
+         .LOS     1027        0     4652     1008        0        0        0                           
+ .LinearAlloc       60        0       32       60        0        0        4                           
+          .GC      180        0        0      180        0        0        0                           
+      .Zygote      242        0     1812      196        0        0        0                           
+   .NonMoving       20        0        0       20        0        0        0                           
+ .IndirectRef       64        0        4       64        0        0        0                           
+ 
+ App Summary
+                       Pss(KB)
+                        ------
+           Java Heap:     3756
+         Native Heap:     3924
+                Code:     2428
+               Stack:      204
+            Graphics:        0
+       Private Other:      716
+              System:     2238
+ 
+               TOTAL:    13266      TOTAL SWAP (KB):       32
+ 
+ Objects
+               Views:      111         ViewRootImpl:        1
+         AppContexts:        5           Activities:        2
+              Assets:        4        AssetManagers:        2
+       Local Binders:       63        Proxy Binders:       18
+       Parcel memory:        5         Parcel count:       23
+    Death Recipients:        0      OpenSSL Sockets:        0
+ 
+ SQL
+         MEMORY_USED:       85
+  PAGECACHE_OVERFLOW:       12          MALLOC_SIZE:       62
+ 
+ DATABASES
+      pgsz     dbsz   Lookaside(b)          cache  Dbname
+         4       20             21     365/1816/2  /data/user/0/com.android.keepass/databases/keepassdroid
+ 
+ Asset Allocations
+    zip:/data/app/com.android.keepass-1/base.apk:/resources.arsc: 44K
