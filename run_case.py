@@ -11,6 +11,8 @@ import run_operation as rop
 
 #run a specific test case
 
+loop_index = []
+
 class Color(Enum):
     LOOP = 1
     CURRENT = 2
@@ -37,11 +39,20 @@ def execLoop(loop_list):
     this_time = loop_list[0]
     print "execLoop time = ", this_time
     i = 0
+    temp_index = 0
+    lindex = len(loop_index)
+    print "lindex = ", lindex
+    print "loop_index = ", loop_index
     while i< this_time or this_time == -1:
         j = 1
         wait_once = False
         while j < len(loop_list):
                 temp = loop_list[j].strip().split()
+                if(lindex > 0):
+                    if temp[-1] == "[loopindex]":
+                        print "loop_index[temp_index] = ", temp_index, ", ", loop_index[temp_index]
+                        temp[-1] = loop_index[temp_index]
+                        temp_index = (temp_index + 1) % lindex
                 print "j = ", j , ": ", temp
                 if temp[0] == "click":
                     rop.tap(temp[1])
@@ -51,6 +62,10 @@ def execLoop(loop_list):
                     rop.rotate(int(temp[1]))
                 elif temp[0] == "back":
                     rop.back_key(int(temp[1]))
+                elif temp[0] == "cleartext":
+                    rop.clear_text(temp[1])
+                elif temp[0] == "inputtext":
+                    rop.input_text(temp[1], temp[2])
                 elif temp[0] == "back_hold":
                     rop.back_hold(int(temp[1]), temp[2])
                 elif temp[0] == "current":
@@ -137,13 +152,32 @@ def execCasePlan(file_name):
                         loop_list.append(line.strip())
                     else:
                         rop.back_key(int(temp[1]))
+                elif temp[0] == "cleartext":
+                    if in_loop == True:
+                        loop_list.append(line.strip())
+                    else:
+                        rop.clear_text(temp[1])
+                elif temp[0] == "inputtext":
+                    if in_loop == True:
+                        loop_list.append(line.strip())
+                    else:
+                        rop.input_text(temp[1], temp[2])
                 elif temp[0] == "back_hold":
                     if in_loop == True:
                         loop_list.append(line.strip())
                     else:
                         rop.back_hold(int(temp[1]), temp[2])
-
+                elif temp[0] == "loopindex":
+                     print "now in loopindex!"
+                     i = 1
+                     global loop_index
+                     loop_index = []
+                     while i < len(temp):
+                        loop_index.append(temp[i])
+                        i = i + 1
+                     print "first: loop_index = ", loop_index
             else:
+                print temp[0]
                 break
 
         f.close()

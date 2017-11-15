@@ -1,0 +1,12 @@
+loopindex  /sdcard/keepass/keepass.kdb /sdcard/keepass/30.kdb /sdcard/keepass/29.kdb /sdcard/keepass/28.kdb /sdcard/keepass/27.kdb /sdcard/keepass/26.kdb /sdcard/keepass/25.kdb /sdcard/keepass/24.kdb /sdcard/keepass/23.kdb /sdcard/keepass/22.kdb /sdcard/keepass/21.kdb /sdcard/keepass/20.kdb /sdcard/keepass/19.kdb /sdcard/keepass/18.kdb /sdcard/keepass/17.kdb /sdcard/keepass/16.kdb /sdcard/keepass/15.kdb /sdcard/keepass/14.kdb /sdcard/keepass/13.kdb /sdcard/keepass/12.kdb /sdcard/keepass/11.kdb /sdcard/keepass/10.kdb /sdcard/keepass/9.kdb /sdcard/keepass/8.kdb /sdcard/keepass/7.kdb /sdcard/keepass/6.kdb /sdcard/keepass/5.kdb /sdcard/keepass/4.kdb /sdcard/keepass/3.kdb /sdcard/keepass/2.kdb /sdcard/keepass/1.kdb
+startloop -1
+wait com.android.keepass/com.keepassdroid.fileselect.FileSelectActivity
+cleartext file_filename
+inputtext file_filename [loopindex]
+click open
+wait com.android.keepass/com.keepassdroid.PasswordActivity
+inputtext password 123
+click pass_ok
+wait com.android.keepass/com.keepassdroid.GroupActivity
+back_hold -1 com.android.keepass/com.keepassdroid.fileselect.FileSelectActivity
+endloop

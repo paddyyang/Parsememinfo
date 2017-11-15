@@ -101,6 +101,25 @@ def back_key(back_times):
            time.sleep(operation_delay);
            i = i + 1
 
+def del_key(back_times):
+    i = 0
+    op_cmd = "adb shell input keyevent KEYCODE_MOVE_END"
+    os.system(op_cmd)
+    op_cmd = "adb shell input keyevent --longpress KEYCODE_DEL"
+    #op_cmd = "adb shell input keyevent KEYCODE_FORWARD_DEL"
+    while i < int(back_times):
+           os.system(op_cmd)
+           i = i + 1
+
+def clear_text(edit_str):
+    tap(edit_str)
+    del_key(15)
+
+def input_text(edit_str, text_str):
+    tap(edit_str)
+    op_cmd = "adb shell input text " + text_str
+    os.system(op_cmd)
+
 def menu_key(back_times):
     i = 0
     op_cmd = "adb shell input keyevent MENU"
