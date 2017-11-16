@@ -1,0 +1,64 @@
+Applications Memory Usage (kB):
+Uptime: 5912106 Realtime: 5912103
+
+** MEMINFO in pid 16732 [org.videolan.vlc] **
+                   Pss      Pss   Shared  Private   Shared  Private  Swapped     Heap     Heap     Heap
+                 Total    Clean    Dirty    Dirty    Clean    Clean    Dirty     Size    Alloc     Free
+                ------   ------   ------   ------   ------   ------   ------   ------   ------   ------
+  Native Heap    26533        0     1048    26476        0        0    19760   305464   273237    32218
+  Dalvik Heap    21726        0     2176    21620        0        0    12000    47029    33054    13975
+ Dalvik Other     1449        0       32     1448        0        0      100                           
+        Stack      260        0        0      260        0        0      164                           
+       Ashmem       68        0        8       64        0        0        0                           
+      Gfx dev    56620        0        0    56620        0        0        0                           
+    Other dev        5        0       44        0        0        4        0                           
+     .so mmap      734      272      280      116     5640      272     2572                           
+    .apk mmap      762      520        0       32     2044      520       44                           
+    .dex mmap      172      164        0        0       16      164        8                           
+    .oat mmap      838      188        0        0     7956      188        4                           
+    .art mmap     1420      352     1136      732     5684      352      228                           
+   Other mmap      112        0        8        4      268       84        4                           
+   EGL mtrack     9728        0        0     9728        0        0        0                           
+      Unknown   175983        0      108   175980        0        0    90556                           
+        TOTAL   296410     1496     4840   293080    21608     1584   125440   352493   306291    46193
+ 
+ Dalvik Details
+        .Heap    20768        0        0    20768        0        0      544                           
+         .LOS      512        0      924      512        0        0    10932                           
+ .LinearAlloc      253        0       28      252        0        0       88                           
+          .GC     1140        0        0     1140        0        0       12                           
+      .Zygote      378        0     1252      272        0        0      484                           
+   .NonMoving       68        0        0       68        0        0       40                           
+ .IndirectRef       56        0        4       56        0        0        0                           
+ 
+ App Summary
+                       Pss(KB)
+                        ------
+           Java Heap:    22704
+         Native Heap:    26476
+                Code:     1292
+               Stack:      260
+            Graphics:    66348
+       Private Other:   177584
+              System:     1746
+ 
+               TOTAL:   296410      TOTAL SWAP (KB):   125440
+ 
+ Objects
+               Views:     7615         ViewRootImpl:        3
+         AppContexts:        9           Activities:        6
+              Assets:        6        AssetManagers:        2
+       Local Binders:       23        Proxy Binders:       23
+       Parcel memory:        7         Parcel count:       28
+    Death Recipients:        0      OpenSSL Sockets:        0
+ 
+ SQL
+         MEMORY_USED:      470
+  PAGECACHE_OVERFLOW:      390          MALLOC_SIZE:       75
+ 
+ DATABASES
+      pgsz     dbsz   Lookaside(b)          cache  Dbname
+         4      424             68        5/678/4  /data/user/0/org.videolan.vlc/databases/vlc_database
+ 
+ Asset Allocations
+    zip:/data/app/org.videolan.vlc-1/base.apk:/resources.arsc: 119K
