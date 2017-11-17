@@ -1,0 +1,60 @@
+Applications Memory Usage (kB):
+Uptime: 3608143 Realtime: 3608141
+
+** MEMINFO in pid 4962 [com.timsu.astrid] **
+                   Pss      Pss   Shared  Private   Shared  Private  Swapped     Heap     Heap     Heap
+                 Total    Clean    Dirty    Dirty    Clean    Clean    Dirty     Size    Alloc     Free
+                ------   ------   ------   ------   ------   ------   ------   ------   ------   ------
+  Native Heap     4157        0     1736     4112        0        0        0     6248     4521     1726
+  Dalvik Heap    86778        0     6444    86708        0        0        4    98304    91961     6343
+ Dalvik Other     2112        0       36     2112        0        0        0                           
+        Stack      292        0        0      292        0        0        0                           
+       Cursor     3380        0        0     3380        0        0        0                           
+       Ashmem      128        0        0      128        0        0        0                           
+    Other dev        4        0       44        0        0        4        0                           
+     .so mmap      766      120     2516      176     6664      120        8                           
+    .apk mmap     1393      260        0       76     4844      260        0                           
+    .dex mmap      827      672        0        8      444      672        0                           
+    .oat mmap     2672     1520        0        0    11416     1520        4                           
+    .art mmap     1442      280     1088      924     6568      280       64                           
+   Other mmap       79        0        8        8      280       48        0                           
+      Unknown      499        0      224      496        0        0        0                           
+        TOTAL   104529     2852    12096    98420    30216     2904       80   104552    96482     8069
+ 
+ Dalvik Details
+        .Heap    83816        0        0    83816        0        0        0                           
+         .LOS     2615        0     4652     2592        0        0        0                           
+ .LinearAlloc      180        0       32      180        0        0        0                           
+          .GC     1864        0        0     1864        0        0        0                           
+      .Zygote      259        0     1792      212        0        0        4                           
+   .NonMoving       88        0        0       88        0        0        0                           
+ .IndirectRef       68        0        4       68        0        0        0                           
+ 
+ App Summary
+                       Pss(KB)
+                        ------
+           Java Heap:    87912
+         Native Heap:     4112
+                Code:     2832
+               Stack:      292
+            Graphics:        0
+       Private Other:     6176
+              System:     3205
+ 
+               TOTAL:   104529      TOTAL SWAP (KB):       80
+ 
+ Objects
+               Views:      205         ViewRootImpl:        2
+         AppContexts:        5           Activities:        1
+              Assets:        6        AssetManagers:        2
+       Local Binders:       61        Proxy Binders:       23
+       Parcel memory:      208         Parcel count:       32
+    Death Recipients:        0      OpenSSL Sockets:        0
+ 
+ SQL
+         MEMORY_USED:      213
+  PAGECACHE_OVERFLOW:       24          MALLOC_SIZE:       62
+ 
+ DATABASES
+      pgsz     dbsz   Lookaside(b)          cache  Dbname
+         4       60            412   1374/2125/25  /data/user/0/com.timsu.astrid/databases/database
