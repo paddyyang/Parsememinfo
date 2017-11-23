@@ -42,7 +42,7 @@ fr.close()
 
 #run smo algorithm
 dataArr,labelArr = sma.loadDataSet('out.csv')
-b,alphas = sma.smoP(dataArr, labelArr, 0.1, 0.15, 400)
+b,alphas = sma.smoP(dataArr, labelArr, 0.6, 0.001, 40000)
 ws= sma.calcWs(alphas,dataArr,labelArr)
 print 'dataArr = ', dataArr
 print 'alphas = ', alphas
@@ -67,13 +67,16 @@ plt.title('Support Vectors Circled')
 w0=ws[0][0]; w1=ws[1][0];
 if(use_3d):
     w2=ws[2][0]
-x = arange(-1, 1, 0.1)
+#x = arange(-1, 1, 0.1)
 #y = arange(-1, 1, 0.1)
 #x,y = meshgrid(x,y)
-y = (-w0*x - b)/w1
+#y = (-w0*x - b)/w1
+y0 = (-w0*(-1.0) - b)/w1
+y1 = (-w0*(1.0) - b)/w1
 #z = (-w0*x-w1*y - b)/w2
 #z = [0.5 for i in range(len(x))]
-ax.plot(x,y)
+#ax.plot(x,y)
+ax.plot([-1,1],[y0,y1])
 #ax.plot_surface(x, y, z,rstride=1, cstride=1, cmap='rainbow')
 ax.axis([-1,1,-1,1])
 plt.show()
