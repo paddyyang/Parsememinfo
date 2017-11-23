@@ -91,19 +91,83 @@ def compute_sign_entropy(data_array):
                 total_area = 0.0
                 for i in range(0, len(data_array)):
                         inc_area = inc_area + data_array[i][0]
-                        total_area = total_area + abs(data_array[i][0])
+                        if data_array[i][0] > 0:
+                            total_area = total_area + abs(data_array[i][0])
                         
                 inc_memory_ratio = inc_area / total_area
                 print 'inc_memory_ratio = ', inc_memory_ratio
                 return inc_memory_ratio
+
+def compute_sign_delta(data_array):
+                inc_area = 0.0
+                total_area = 0.0
+                for i in range(0, len(data_array)):
+                        inc_area = inc_area + data_array[i][0]
+                        if data_array[i][0] > 0:
+                            if data_array[i][0] > inc_area:
+                                print "the index ",i, "-->", data_array[i][0], ' is possible a peak!'
+                            else:
+                                total_area = total_area + data_array[i][0]
+                        
+                inc_memory_ratio = inc_area / total_area
+                print 'inc_memory_ratio = ', inc_memory_ratio
+                return inc_memory_ratio
+
+def get_sigmoid_value(x):
+    return 1.0/(1+math.exp(-x*1.0))
+
+def compute_average_value_area(data_array):
+   size = len(data_array)
+   ref_value = 0.0
+   for i in range(0, size):
+           ref_value = ref_value + data_array[i][0]
+   ref_value = ref_value / size
+   average_area = ref_value * size
+   calculator_area = 0.0
+   for i in range(1, size):
+           calculator_area = calculator_area + compute(data_array[i-1][0], data_array[i][0])
+           
+   delta_area = calculator_area - average_area
+   delta_index = delta_area / ref_value;
+   sigmoid_value = get_sigmoid_value(delta_index)
+   print 'average area: ', average_area, ', calculator_area: ', calculator_area, ', delta_area: ', delta_area, ", delta_index: ", delta_index
+   print 'sigmoid value is ', sigmoid_value
+   return sigmoid_value
+
+def compute_simple_value_area(data_array):
+   size = len(data_array)
+   ref_value = data_array[0][0]
+   simple_area = ref_value * size
+   calculator_area = 0.0
+   for i in range(1, size):
+           calculator_area = calculator_area + compute(data_array[i-1][0], data_array[i][0])
+           
+   delta_area = calculator_area - simple_area
+   delta_index = delta_area / simple_area;
+   sigmoid_value = 0.0
+   sigmoid_delta = 1.0
+   if delta_index > 0:
+        sigmoid_value = get_sigmoid_value(delta_index)
+        print 'sigmoid_value 1 = ', sigmoid_value
+        if sigmoid_value < 0.6:
+            sigmoid_delta = (sigmoid_value - 0.5) * 10
+        sigmoid_value = sigmoid_value * sigmoid_delta
+   #else:
+   #     sigmoid_value = get_sigmoid_value(delta_index) - 0.5
+   print 'ref_value: ', ref_value, ', simple area: ', simple_area, ', calculator_area: ', calculator_area, ', delta_area: ', delta_area, ", delta_index: ", delta_index
+   print 'sigmoid value is ', sigmoid_value
+   return sigmoid_value
 
 def compute_array(ex1):
                 #now we compute memory area for increase or decrease
                 data_array, data_array_value = compute_entropy(ex1)
                 inc_memory_ratio = compute_sign_entropy(data_array)
 
-                data_array2 = compute_delta(ex1)
-                inc_memory_ratio2 = compute_sign_area(data_array2)
+                #data_array2 = compute_delta(ex1)
+                #inc_memory_ratio2 = compute_sign_delta(data_array2)
+                inc_memory_ratio2 = compute_simple_value_area(ex1)
+                
+                #compute_average_value_area(ex1)
 
                 #inc_memory_ratio2 = compute_sign_entropy(data_array_value)
                 #print "data_array2 = ", data_array2
@@ -119,7 +183,7 @@ def compute_array(ex1):
                 #print "sum_value = ", sum_value
                 #print "sum_value_abs = ", sum_value_abs
                 #inc_memory_ratio1 = sum_value/sum_value_abs
-                return inc_memory_ratio, inc_memory_ratio2
+                return round(inc_memory_ratio,2), round(inc_memory_ratio2,2)
 
 # test
 area1 = compute(3, 4)
