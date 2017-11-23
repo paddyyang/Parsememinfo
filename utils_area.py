@@ -91,8 +91,7 @@ def compute_sign_entropy(data_array):
                 total_area = 0.0
                 for i in range(0, len(data_array)):
                         inc_area = inc_area + data_array[i][0]
-                        if data_array[i][0] > 0:
-                            total_area = total_area + abs(data_array[i][0])
+                        total_area = total_area + abs(data_array[i][0])
                         
                 inc_memory_ratio = inc_area / total_area
                 print 'inc_memory_ratio = ', inc_memory_ratio
