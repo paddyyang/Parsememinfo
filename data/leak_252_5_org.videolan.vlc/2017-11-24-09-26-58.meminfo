@@ -1,0 +1,65 @@
+Applications Memory Usage (kB):
+Uptime: 2363428 Realtime: 2434331
+
+** MEMINFO in pid 4812 [org.videolan.vlc] **
+                   Pss      Pss   Shared  Private   Shared  Private  Swapped     Heap     Heap     Heap
+                 Total    Clean    Dirty    Dirty    Clean    Clean    Dirty     Size    Alloc     Free
+                ------   ------   ------   ------   ------   ------   ------   ------   ------   ------
+  Native Heap    29747        0     1692    29704        0        0        0    63648    35790    27857
+  Dalvik Heap    36999        0     6372    36932        0        0        0    49479    46771     2708
+ Dalvik Other     1880        0       32     1880        0        0        0                           
+        Stack      492        0        0      492        0        0        0                           
+       Ashmem      196        0      224       84        0        0        0                           
+      Gfx dev    59940        0     1272    59304        0        0        0                           
+    Other dev        4        0       44        0        0        4        0                           
+     .so mmap     3963     2588     2508      480     7804     2588        8                           
+    .apk mmap    11446    10008        0       76     4836    10008        0                           
+    .ttf mmap       30        0        0        0      124        0        0                           
+    .dex mmap     1476     1204        0        8      528     1204        0                           
+    .oat mmap     2586     1208        0        0    11260     1208        4                           
+    .art mmap     1497      320     1124      928     6292      320       48                           
+   Other mmap      726        0        8        8      396      648        0                           
+   EGL mtrack     9728        0        0     9728        0        0        0                           
+      Unknown    42058        0      192    42056        0        0        0                           
+        TOTAL   202768    15328    13468   181680    31240    15980       60   113127    82561    30565
+ 
+ Dalvik Details
+        .Heap    27352        0        0    27352        0        0        0                           
+         .LOS     9199        0     4652     9176        0        0        0                           
+ .LinearAlloc      336        0       28      336        0        0        0                           
+          .GC     1460        0        0     1460        0        0        0                           
+      .Zygote      332        0     1720      288        0        0        0                           
+   .NonMoving      116        0        0      116        0        0        0                           
+ .IndirectRef       84        0        4       84        0        0        0                           
+ 
+ App Summary
+                       Pss(KB)
+                        ------
+           Java Heap:    38180
+         Native Heap:    29704
+                Code:    15572
+               Stack:      492
+            Graphics:    69032
+       Private Other:    44680
+              System:     5108
+ 
+               TOTAL:   202768      TOTAL SWAP (KB):       60
+ 
+ Objects
+               Views:     7297         ViewRootImpl:        2
+         AppContexts:        9           Activities:        6
+              Assets:        6        AssetManagers:        2
+       Local Binders:       29        Proxy Binders:       24
+       Parcel memory:        7         Parcel count:       28
+    Death Recipients:        0      OpenSSL Sockets:        0
+ 
+ SQL
+         MEMORY_USED:      470
+  PAGECACHE_OVERFLOW:      390          MALLOC_SIZE:       75
+ 
+ DATABASES
+      pgsz     dbsz   Lookaside(b)          cache  Dbname
+         4      424             68       13/345/4  /data/user/0/org.videolan.vlc/databases/vlc_database
+ 
+ Asset Allocations
+    zip:/data/app/org.videolan.vlc-1/base.apk:/resources.arsc: 119K
