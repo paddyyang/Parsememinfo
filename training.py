@@ -15,7 +15,7 @@ from mpl_toolkits.mplot3d import Axes3D
 
 #sys.setrecursionlimit(100000)
 #def train_sample(package, size):
-def train_sample(mydir):
+def train_sample(mydir, data_size = None):
         #get all the sub-directory in data directory
         sub_dirs = os.listdir('./data')
         #sub_dirs = [x for x in files if os.path.isdir(x)]
@@ -45,7 +45,7 @@ def train_sample(mydir):
                 print 'package == ', package
 
 
-                ex1, files = codata.get_training_data(package, './data/' + dir_name )
+                ex1, files = codata.get_training_data(package, './data/' + dir_name, data_size )
 
                 print 'ex1 = ', ex1
 

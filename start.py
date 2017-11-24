@@ -11,4 +11,9 @@ import parseConfig as pc
 
 #size, interval, package, memory_kb = pc.get_config()
 #training.train_sample(package, int(size))
-training.train_sample(sys.argv[1])
+if len(sys.argv) > 2:
+    training.train_sample(sys.argv[1], sys.argv[2])
+elif len(sys.argv) > 1:
+    training.train_sample(sys.argv[1])
+else:
+    training.train_sample('')

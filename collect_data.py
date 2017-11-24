@@ -2,14 +2,26 @@ import os
 import parse
 
 
-def get_training_data(pid_name, data_dir):
+def get_training_data(pid_name, data_dir, data_size = None):
 
     exa_index = -1
+    max_size = -2
+    files_len = 0
+
     files = os.listdir(data_dir)
     files.sort()
-    example = [[0 for i in range(2)] for j in range(len(files))]
+
+    if data_size != None:
+        max_size = int(data_size)
+        files_len = max_size
+    else:
+        files_len = len(files)
+
+    example = [[0 for i in range(2)] for j in range(files_len)]
     print files
     for file_name in files:
+            if max_size - 1 == exa_index:
+                break
             if file_name.find('meminfo') > 0:
                     meminfo = parse.parseLogFile(data_dir + '/' + file_name)
                     if(meminfo.has_key(pid_name)):
