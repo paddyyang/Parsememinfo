@@ -113,7 +113,8 @@ def compute_sign_delta(data_array):
                 return inc_memory_ratio
 
 def get_sigmoid_value(x):
-    return 1.0/(1+math.exp(-x*1.0))
+    #return 1.0/(1+math.exp(-x*1.0))
+    return math.tanh(x)
 
 def compute_average_value_area(data_array):
    size = len(data_array)
@@ -145,12 +146,12 @@ def compute_simple_value_area(data_array):
    delta_index = delta_area / simple_area;
    sigmoid_value = 0.0
    sigmoid_delta = 1.0
-   if delta_index > 0:
-        sigmoid_value = get_sigmoid_value(delta_index)
-        print 'sigmoid_value 1 = ', sigmoid_value
-        if sigmoid_value < 0.6:
-            sigmoid_delta = (sigmoid_value - 0.5) * 10
-        sigmoid_value = sigmoid_value * sigmoid_delta
+   #if delta_index > 0:
+   sigmoid_value = get_sigmoid_value(delta_index)
+   print 'sigmoid_value 1 = ', sigmoid_value
+   #if sigmoid_value < 0.6:
+   #    sigmoid_delta = (sigmoid_value - 0.5) * 10
+   #sigmoid_value = sigmoid_value * sigmoid_delta
    #else:
    #     sigmoid_value = get_sigmoid_value(delta_index) - 0.5
    print 'ref_value: ', ref_value, ', simple area: ', simple_area, ', calculator_area: ', calculator_area, ', delta_area: ', delta_area, ", delta_index: ", delta_index
